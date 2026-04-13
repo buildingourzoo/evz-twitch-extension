@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>EVZ Animals Panel</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: white;
+      display: flex;
+    }
+
+    /* LEFT MENU */
+    .menu {
+      width: 150px;
+      background: #000;
+      padding: 10px;
+    }
+
+    button {
+      width: 100%;
+      margin-bottom: 8px;
+      padding: 10px;
+      background: #222;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+
+    button:hover {
+      background: #333;
+    }
+
+    /* CARD */
+    .card {
+      flex: 1;
+      padding: 18px;
+      background: rgba(0,0,0,0.78);
+      margin: 20px;
+      border-radius: 16px;
+    }
+
+    .name {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .species {
+      font-size: 14px;
+      opacity: 0.85;
+      margin-bottom: 10px;
+    }
+
+    .label {
+      font-size: 12px;
+      opacity: 0.7;
+      margin-top: 10px;
+    }
+
+    .text {
+      font-size: 13px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- MENU -->
+  <div class="menu">
+    <button onclick="showAnimal('tango')">Tango</button>
+    <button onclick="showAnimal('missi')">Missi</button>
+  </div>
+
+  <!-- CARD -->
+  <div class="card">
+    <div class="name" id="name">Tango</div>
+    <div class="species" id="species">Red Panda</div>
+
+    <div class="label">Sex</div>
+    <div class="text" id="sex">Male</div>
+
+    <div class="label">Age</div>
+    <div class="text" id="age">10</div>
+
+    <div class="label">Birthday</div>
+    <div class="text" id="birthday">July 30, 2015</div>
+
+    <div class="label">Arrived at EVZ</div>
+    <div class="text" id="arrived">Born at EVZ</div>
+
+    <div class="label">About</div>
+    <div class="text" id="about"></div>
+
+    <div class="label">Unique Identifiers</div>
+    <div class="text" id="identifiers"></div>
+
+    <div class="label">IUCN Status</div>
+    <div class="text" id="status"></div>
+
+    <div class="label">Conservation Info</div>
+    <div class="text" id="conservation"></div>
+  </div>
+
+  <script>
+    const animals = {
+      tango: {
+        name: "Tango",
+        species: "Red Panda (Ailurus fulgens)",
+        sex: "Male",
+        age: "10",
+        birthday: "July 30, 2015",
+        arrived: "Born at EVZ",
+        about:
+          "Tango is the father of Fred and George and enjoys a calm bachelor lifestyle.",
+        identifiers:
+          "Reddish fur, bushy ringed tail, highly arboreal",
+        status: "Endangered",
+        conservation:
+          "Red pandas face habitat loss and fragmentation due to deforestation."
+      },
+
+      missi: {
+        name: "Missi",
+        species: "North American River Otter",
+        sex: "Female",
+        age: "~12",
+        birthday: "~ from Jan 01, 2014 to Jan 30, 2014 ",
+        arrived: "2026",
+        about:
+          "Missi is a playful otter who loves swimming and exploring.",
+        identifiers:
+          "Dark brown coat, streamlined body, very active",
+        status: "Least Concern",
+        conservation:
+          "River otters depend on clean waterways and healthy ecosystems."
+      }
+    };
+
+    function showAnimal(key) {
+      const a = animals[key];
+
+      document.getElementById("name").innerText = a.name;
+      document.getElementById("species").innerText = a.species;
+      document.getElementById("sex").innerText = a.sex;
+      document.getElementById("age").innerText = a.age;
+      document.getElementById("birthday").innerText = a.birthday;
+      document.getElementById("arrived").innerText = a.arrived;
+      document.getElementById("about").innerText = a.about;
+      document.getElementById("identifiers").innerText = a.identifiers;
+      document.getElementById("status").innerText = a.status;
+      document.getElementById("conservation").innerText = a.conservation;
+    }
+  </script>
+
+</body>
+</html>
