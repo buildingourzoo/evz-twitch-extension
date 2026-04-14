@@ -6,7 +6,8 @@ const animals = {
     age: "10",
     birthday: "July 30, 2015",
     arrived: "Born at EVZ",
-    about: "Tango is the uncontested king of the channel...",
+    about: "Tango is the uncontested king of the channel, preferring a quiet life of frequent naps, biscuits, and tax collection. Hard to impress but impossible to ignore, Tango may grant his approval to viewers who pay tribute through channel point and donation offerings (aka the "Tango Tax") made in his honour.
+He has played an important role in the Red Panda Species Survival Plan (SSP), most recently siring Fred and George, with partner Kiki at the Edmonton Valley Zoo. He previously fathered five additional cubs (Tanvi, Little Red, Suva, Crimson, and Mambo) with Sachi during his time at Assiniboine Park Zoo.",
     identifiers: "Round face and oval-shaped eyebrows",
     status: "Endangered",
     conservation: "Red pandas face growing threats..."
