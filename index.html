@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <title>EVZ Animals Panel</title>
 
-  <!-- Allow Twitch to embed this page -->
   <meta http-equiv="Content-Security-Policy" content="frame-ancestors https://*.twitch.tv https://twitch.tv">
 
   <style>
@@ -13,151 +12,156 @@
       font-family: Arial, sans-serif;
       background: #111;
       color: white;
-      display: flex;
+      width: 300px;
+      height: 300px;
+      overflow: hidden;
     }
 
-    /* LEFT MENU */
+    .wrapper {
+      padding: 8px;
+      box-sizing: border-box;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
     .menu {
-      width: 150px;
-      background: #000;
-      padding: 10px;
+      display: flex;
+      gap: 4px;
     }
 
     button {
-      width: 100%;
-      margin-bottom: 8px;
-      padding: 10px;
+      flex: 1;
+      padding: 6px;
       background: #222;
       color: white;
       border: none;
       cursor: pointer;
-      border-radius: 6px;
+      border-radius: 5px;
+      font-size: 11px;
     }
 
     button:hover {
       background: #333;
     }
 
-    /* CARD */
     .card {
       flex: 1;
-      padding: 18px;
       background: rgba(0,0,0,0.78);
-      margin: 20px;
-      border-radius: 16px;
+      border-radius: 10px;
+      padding: 8px;
+      overflow-y: auto;
     }
 
     .name {
-      font-size: 24px;
+      font-size: 16px;
       font-weight: bold;
     }
 
     .species {
-      font-size: 14px;
-      opacity: 0.85;
-      margin-bottom: 10px;
+      font-size: 11px;
+      opacity: 0.8;
+      margin-bottom: 6px;
     }
 
     .label {
-      font-size: 12px;
-      opacity: 0.7;
-      margin-top: 10px;
+      font-size: 10px;
+      opacity: 0.6;
+      margin-top: 6px;
     }
 
     .text {
-      font-size: 13px;
+      font-size: 11px;
+      line-height: 1.2;
     }
   </style>
 </head>
 
 <body>
 
-  <!-- MENU -->
+<div class="wrapper">
+
   <div class="menu">
     <button onclick="showAnimal('tango')">Tango</button>
     <button onclick="showAnimal('kiki')">Kiki</button>
   </div>
 
-  <!-- CARD -->
   <div class="card">
     <div class="name" id="name">Tango</div>
     <div class="species" id="species">Red Panda</div>
 
     <div class="label">Sex</div>
-    <div class="text" id="sex">Male</div>
+    <div class="text" id="sex"></div>
 
     <div class="label">Age</div>
-    <div class="text" id="age">10</div>
+    <div class="text" id="age"></div>
 
     <div class="label">Birthday</div>
-    <div class="text" id="birthday">July 30, 2015</div>
+    <div class="text" id="birthday"></div>
 
-    <div class="label">Arrived at EVZ</div>
-    <div class="text" id="arrived">Born at EVZ</div>
+    <div class="label">Arrived</div>
+    <div class="text" id="arrived"></div>
 
     <div class="label">About</div>
     <div class="text" id="about"></div>
 
-    <div class="label">Unique Identifiers</div>
+    <div class="label">Identifiers</div>
     <div class="text" id="identifiers"></div>
 
     <div class="label">IUCN Status</div>
     <div class="text" id="status"></div>
 
-    <div class="label">Conservation Info</div>
+    <div class="label">Conservation</div>
     <div class="text" id="conservation"></div>
   </div>
 
-  <script>
-    const animals = {
-      tango: {
-        name: "Tango",
-        species: "Red Panda (Ailurus fulgens)",
-        sex: "Male",
-        age: "10",
-        birthday: "July 30, 2015",
-        arrived: "Born at EVZ",
-        about:
-          "Tango is the father of Fred and George.",
-        identifiers:
-          "Round face and oval-shaped eyebrows",
-        status: "Endangered",
-        conservation:
-          "Red pandas face habitat loss and fragmentation due to deforestation."
-      },
+</div>
 
-      kiki: {
-        name: "Kiki",
-        species: "Red panda (Ailurus fulgens)",
-        sex: "Female",
-        age: "6",
-        birthday: "June 7, 2019",
-        arrived: "2021",
-        about:
-          "Kiki is the mother of Fred and George.",
-        identifiers:
-          "Downturned ears and light colouration,
-        status: "Endangered",
-        conservation:
-          "Red pandas face habitat loss and fragmentation due to deforestation."
-      }
-    };
+<script>
+  const animals = {
+    tango: {
+      name: "Tango",
+      species: "Red Panda (Ailurus fulgens)",
+      sex: "Male",
+      age: "10",
+      birthday: "July 30, 2015",
+      arrived: "Born at EVZ",
+      about: "Tango is the father of Fred and George.",
+      identifiers: "Round face and oval-shaped eyebrows",
+      status: "Endangered",
+      conservation: "Red pandas face habitat loss and fragmentation due to deforestation."
+    },
 
-    function showAnimal(key) {
-      const a = animals[key];
-
-      document.getElementById("name").innerText = a.name;
-      document.getElementById("species").innerText = a.species;
-      document.getElementById("sex").innerText = a.sex;
-      document.getElementById("age").innerText = a.age;
-      document.getElementById("birthday").innerText = a.birthday;
-      document.getElementById("arrived").innerText = a.arrived;
-      document.getElementById("about").innerText = a.about;
-      document.getElementById("identifiers").innerText = a.identifiers;
-      document.getElementById("status").innerText = a.status;
-      document.getElementById("conservation").innerText = a.conservation;
+    kiki: {
+      name: "Kiki",
+      species: "Red panda (Ailurus fulgens)",
+      sex: "Female",
+      age: "6",
+      birthday: "June 7, 2019",
+      arrived: "2021",
+      about: "Kiki is the mother of Fred and George.",
+      identifiers: "Downturned ears and light coloration",
+      status: "Endangered",
+      conservation: "Red pandas face habitat loss and fragmentation due to deforestation."
     }
-  </script>
+  };
+
+  function showAnimal(key) {
+    const a = animals[key];
+
+    document.getElementById("name").innerText = a.name;
+    document.getElementById("species").innerText = a.species;
+    document.getElementById("sex").innerText = a.sex;
+    document.getElementById("age").innerText = a.age;
+    document.getElementById("birthday").innerText = a.birthday;
+    document.getElementById("arrived").innerText = a.arrived;
+    document.getElementById("about").innerText = a.about;
+    document.getElementById("identifiers").innerText = a.identifiers;
+    document.getElementById("status").innerText = a.status;
+    document.getElementById("conservation").innerText = a.conservation;
+  }
+</script>
 
 </body>
 </html>
