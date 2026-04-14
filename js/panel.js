@@ -39,9 +39,13 @@ function showAnimal(key) {
   document.getElementById("identifiers").innerText = a.identifiers;
   document.getElementById("status").innerText = a.status;
   document.getElementById("conservation").innerText = a.conservation;
+  var lightBox = document.getElementById("lightbox");
+  lightBox.style.pointerEvents = "auto";
+  lightBox.style.opacity = 1;
 }
 
-// wait for page to load first
-window.onload = function () {
-  showAnimal("tango");
-};
+function hideCard() {
+  var lightBox = document.getElementById("lightbox");
+  lightBox.style.pointerEvents = "none";
+  lightBox.style.opacity = 0;
+}
