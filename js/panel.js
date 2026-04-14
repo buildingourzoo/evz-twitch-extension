@@ -41,4 +41,7 @@ function showAnimal(key) {
   document.getElementById("conservation").innerText = a.conservation;
 }
 
-showAnimal("tango");
+// wait for page to load first
+window.onload = function () {
+  showAnimal("tango");
+};
