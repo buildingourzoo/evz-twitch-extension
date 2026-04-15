@@ -1,7 +1,7 @@
 const animals = {
   tango: {
     name: "Tango",
-    species: "Red Panda (Ailurus fulgens)",
+    species: "Red Panda (Ailurus fulgens styani)",
     sex: "Male",
     age: "10",
     birthday: "July 30, 2015",
@@ -14,13 +14,39 @@ const animals = {
 
   kiki: {
     name: "Kiki",
-    species: "Red panda (Ailurus fulgens)",
+    species: "Red panda (Ailurus fulgens styani)",
     sex: "Female",
     age: "6",
     birthday: "June 7, 2019",
     arrived: "2021",
     about: "Kiki is a curious and confident red panda, always happy to participate in training sessions or investigate new enrichments, especially when something new catches her attention. She is the proud mother of Fred and George, her first-ever cubs, born at the Edmonton Valley Zoo.",
     identifiers: "Downturned ears and light coloration",
+    status: "Endangered",
+    conservation: "Red pandas face growing threats from habitat loss, fragmentation, and human pressures that continue to reduce and isolate wild populations, with estimates suggesting there may be as few as 2,500 remaining in the wild. Through the Red Panda Network, we're proud to support critical conservation work in Nepal, including the establishment of a biological corridor that reconnects fragmented habitat and supports a more resilient future for red pandas in the wild."
+  },
+
+  fred: {
+    name: "Fred",
+    species: "Red panda (Ailurus fulgens styani)",
+    sex: "Male",
+    age: "1",
+    birthday: "July 7, 2024",
+    arrived: "Born at EVZ",
+    about: "Fred personality info",
+    identifiers: "Lighter markings under eyes, thinner dark stripes around snout, more pointed face",
+    status: "Endangered",
+    conservation: "Red pandas face growing threats from habitat loss, fragmentation, and human pressures that continue to reduce and isolate wild populations, with estimates suggesting there may be as few as 2,500 remaining in the wild. Through the Red Panda Network, we're proud to support critical conservation work in Nepal, including the establishment of a biological corridor that reconnects fragmented habitat and supports a more resilient future for red pandas in the wild."
+  },
+
+  george: {
+    name: "George",
+    species: "Red panda (Ailurus fulgens styani)",
+    sex: "Male",
+    age: "1",
+    birthday: "July 7, 2024",
+    arrived: "Born at EVZ",
+    about: "George personality info",
+    identifiers: "Lighter markings under eyes, thinner dark stripes around snout, more pointed face",
     status: "Endangered",
     conservation: "Red pandas face growing threats from habitat loss, fragmentation, and human pressures that continue to reduce and isolate wild populations, with estimates suggesting there may be as few as 2,500 remaining in the wild. Through the Red Panda Network, we're proud to support critical conservation work in Nepal, including the establishment of a biological corridor that reconnects fragmented habitat and supports a more resilient future for red pandas in the wild."
   }
