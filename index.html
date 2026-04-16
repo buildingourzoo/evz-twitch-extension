@@ -56,7 +56,7 @@
       flex: 1;
     }
 
-    button {
+    .animal-btn {
       padding: 6px;
       background: #222;
       color: white;
@@ -66,13 +66,13 @@
       font-size: 11px;
     }
 
-    button img {
+    .animal-btn img {
       width: 100%;
       border-radius: 4px;
       margin-bottom: 4px;
     }
 
-    button:hover {
+    .animal-btn:hover {
       background: #333;
     }
 
@@ -137,11 +137,6 @@
       padding: 8px;
     }
 
-    .name {
-      font-size: 14px;
-      font-weight: bold;
-    }
-
     .species {
       font-size: 11px;
       opacity: 0.8;
@@ -175,19 +170,50 @@
   <div class="menu" id="menu">
 
     <!-- RED PANDAS -->
-    <button data-type="redpanda" onclick="showAnimal('tango','assets/red pandas/Tango-profile.jpg')"><img src="assets/red pandas/Tango-profile.jpg">Tango</button>
-    <button data-type="redpanda" onclick="showAnimal('kiki','assets/red pandas/Kiki-profile.jpg')"><img src="assets/red pandas/Kiki-profile.jpg">Kiki</button>
-    <button data-type="redpanda" onclick="showAnimal('fred','assets/red pandas/Fred-profile.jpg')"><img src="assets/red pandas/Fred-profile.jpg">Fred</button>
-    <button data-type="redpanda" onclick="showAnimal('george','assets/red pandas/George-profile.jpg')"><img src="assets/red pandas/George-profile.jpg">George</button>
+    <button class="animal-btn" data-type="redpanda" onclick="showAnimal('tango')">
+      <img src="assets/red pandas/Tango-profile.jpg">Tango
+    </button>
+
+    <button class="animal-btn" data-type="redpanda" onclick="showAnimal('kiki')">
+      <img src="assets/red pandas/Kiki-profile.jpg">Kiki
+    </button>
+
+    <button class="animal-btn" data-type="redpanda" onclick="showAnimal('fred')">
+      <img src="assets/red pandas/Fred-profile.jpg">Fred
+    </button>
+
+    <button class="animal-btn" data-type="redpanda" onclick="showAnimal('george')">
+      <img src="assets/red pandas/George-profile.jpg">George
+    </button>
 
     <!-- SEALS -->
-    <button data-type="seal" onclick="showAnimal('hula','assets/seals/Hula-profile.jpg')"><img src="assets/seals/Hula-profile.jpg">Hula</button>
-    <button data-type="seal" onclick="showAnimal('sushi','assets/seals/Sushi-profile.jpg')"><img src="assets/seals/Sushi-profile.jpg">Sushi</button>
-    <button data-type="seal" onclick="showAnimal('wasabi','assets/seals/Wasabi-profile.jpg')"><img src="assets/seals/Wasabi-profile.jpg">Wasabi</button>
-    <button data-type="seal" onclick="showAnimal('sophia','assets/seals/Sophia-profile.jpg')"><img src="assets/seals/Sophia-profile.jpg">Sophia</button>
-    <button data-type="seal" onclick="showAnimal('mischa','assets/seals/Mischa-profile.jpg')"><img src="assets/seals/Mischa-profile.jpg">Mischa</button>
-    <button data-type="seal" onclick="showAnimal('isadora','assets/seals/Isadora-profile.jpg')"><img src="assets/seals/Isadora-profile.jpg">Isadora</button>
-    <button data-type="seal" onclick="showAnimal('nika','assets/seals/Nika-profile.jpg')"><img src="assets/seals/Nika-profile.jpg">Nika</button>
+    <button class="animal-btn" data-type="seal" onclick="showAnimal('hula')">
+      <img src="assets/seals/Hula-profile.jpg">Hula
+    </button>
+
+    <button class="animal-btn" data-type="seal" onclick="showAnimal('sushi')">
+      <img src="assets/seals/Sushi-profile.jpg">Sushi
+    </button>
+
+    <button class="animal-btn" data-type="seal" onclick="showAnimal('wasabi')">
+      <img src="assets/seals/Wasabi-profile.jpg">Wasabi
+    </button>
+
+    <button class="animal-btn" data-type="seal" onclick="showAnimal('sophia')">
+      <img src="assets/seals/Sophia-profile.jpg">Sophia
+    </button>
+
+    <button class="animal-btn" data-type="seal" onclick="showAnimal('mischa')">
+      <img src="assets/seals/Mischa-profile.jpg">Mischa
+    </button>
+
+    <button class="animal-btn" data-type="seal" onclick="showAnimal('isadora')">
+      <img src="assets/seals/Isadora-profile.jpg">Isadora
+    </button>
+
+    <button class="animal-btn" data-type="seal" onclick="showAnimal('nika')">
+      <img src="assets/seals/Nika-profile.jpg">Nika
+    </button>
 
   </div>
 
@@ -218,6 +244,11 @@
   </div>
 </div>
 
+<!-- TWITCH LOGIC -->
+<script src="https://extension-files.twitch.tv/helper/v1/twitch-ext.min.js"></script>
+<script src="js/panel.js"></script>
+
+<!-- UI LOGIC -->
 <script>
 let scrollPosition = 0;
 
@@ -234,20 +265,15 @@ function filterAnimals(type, btn) {
   });
 }
 
-function showAnimal(key, imgPath) {
+const originalShowAnimal = window.showAnimal;
+
+window.showAnimal = function(key) {
   scrollPosition = document.getElementById("menu").scrollTop;
 
-  const a = animals[key];
-
-  document.getElementById("name").innerText = a.name;
-  document.getElementById("species").innerText = a.species;
-  document.getElementById("about").innerText = a.about;
-  document.getElementById("identifiers").innerText = a.identifiers;
-
-  document.getElementById("profileImage").src = imgPath;
+  originalShowAnimal(key);
 
   document.getElementById("lightbox").classList.add("active");
-}
+};
 
 function hideCard() {
   document.getElementById("lightbox").classList.remove("active");
