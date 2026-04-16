@@ -1,4 +1,7 @@
 const animals = {
+
+  // RED PANDAS //
+  
   tango: {
     name: "Tango",
     species: "Red Panda (Ailurus fulgens styani)",
@@ -51,6 +54,8 @@ const animals = {
     conservation: "Red pandas face growing threats from habitat loss, fragmentation, and human pressures that continue to reduce and isolate wild populations, with estimates suggesting there may be as few as 2,500 remaining in the wild. Through the Red Panda Network, we're proud to support critical conservation work in Nepal, including the establishment of a biological corridor that reconnects fragmented habitat and supports a more resilient future for red pandas in the wild."
   },
 
+// SEALS //
+  
   hula: {
     name: "Hula",
     species: "Harbour seal (Phoca vitulina)",
