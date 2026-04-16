@@ -27,7 +27,7 @@
       gap: 6px;
     }
 
-    /* TOP NAV */
+    /* TOP TABS */
     .topbar {
       display: flex;
       gap: 4px;
@@ -48,13 +48,31 @@
       background: #444;
     }
 
+    /* ABOUT */
+    .about {
+      display: none;
+      flex: 1;
+      overflow-y: auto;
+      font-size: 11px;
+      line-height: 1.3;
+      padding: 4px;
+    }
+
+    .about.active {
+      display: block;
+    }
+
     /* GRID */
     .menu {
-      display: grid;
+      display: none;
       grid-template-columns: 1fr 1fr;
       gap: 6px;
       overflow-y: auto;
       flex: 1;
+    }
+
+    .menu.active {
+      display: grid;
     }
 
     .animal-btn {
@@ -71,32 +89,6 @@
       width: 100%;
       border-radius: 5px;
       margin-bottom: 4px;
-    }
-
-    /* ABOUT */
-    .about {
-      display: none;
-      overflow-y: auto;
-      flex: 1;
-      font-size: 11px;
-      line-height: 1.3;
-      padding: 4px;
-    }
-
-    .about.active {
-      display: block;
-    }
-
-    .logo-row {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      margin-bottom: 8px;
-    }
-
-    .logo-row img {
-      width: 50%;
-      cursor: pointer;
     }
 
     /* LIGHTBOX */
@@ -123,7 +115,6 @@
       background: #000;
       border-radius: 10px;
       overflow-y: auto;
-      position: relative;
     }
 
     .sticky {
@@ -134,28 +125,34 @@
       justify-content: space-between;
       padding: 6px;
       border-bottom: 1px solid #222;
-      z-index: 2;
     }
 
     .close {
       cursor: pointer;
     }
 
+    /* IMAGE EXPAND ANIMATION */
     .profile-img {
       width: 100%;
-      max-height: 140px;
+      max-height: 90px;
       object-fit: contain;
       background: #000;
+      transition: max-height 0.25s ease, transform 0.25s ease;
+    }
+
+    .profile-img.expanded {
+      max-height: 160px;
+      transform: scale(1.02);
     }
 
     .content {
       padding: 8px;
     }
 
-    .name {
-      font-size: 14px;
-      font-weight: bold;
-      margin-bottom: 4px;
+    .label {
+      font-size: 10px;
+      opacity: 0.6;
+      margin-top: 6px;
     }
 
     .text {
@@ -163,10 +160,9 @@
       line-height: 1.2;
     }
 
-    .label {
-      font-size: 10px;
-      opacity: 0.6;
-      margin-top: 6px;
+    .species {
+      font-size: 11px;
+      opacity: 0.8;
     }
   </style>
 </head>
@@ -175,7 +171,7 @@
 
 <div class="wrapper">
 
-  <!-- NAV -->
+  <!-- TABS -->
   <div class="topbar">
     <button class="active" onclick="switchTab('about', this)">About</button>
     <button onclick="switchTab('redpanda', this)">Red Pandas</button>
@@ -184,27 +180,19 @@
 
   <!-- ABOUT -->
   <div class="about active" id="aboutTab">
-    <div class="logo-row">
-      <a href="https://www.edmonton.ca/valleyzoo" target="_blank">
-        <img src="assets/logos/EVZ/EVZ_Logo_Owl.jpg">
-      </a>
-
-      <a href="https://buildingourzoo.com" target="_blank">
-        <img src="assets/logos/VZDS/VZDS-Vertical-Logo-White.png">
-      </a>
-    </div>
-
     <b>About the Edmonton Valley Zoo</b><br><br>
-    The Edmonton Valley Zoo (EVZ) is an accredited facility located in Alberta, Canada. Since its opening on July 1, 1959, the Zoo has become a cornerstone experience connecting visitors with animals in a space dedicated to conservation and care.<br><br>
 
-    EVZ is accredited by CAZA and is a member of WAZA.<br><br>
+    The Edmonton Valley Zoo (EVZ) is an accredited facility located in Alberta, Canada. Since its opening on July 1, 1959, the Zoo has become a cornerstone experience connecting visitors with animals in a space dedicated to the care and conservation of our natural world.<br><br>
+
+    The EVZ is accredited by CAZA and is a member of WAZA.<br><br>
 
     <b>About the Valley Zoo Development Society</b><br><br>
-    The VZDS is a registered charity and non-profit supporting the Edmonton Valley Zoo. The Twitch channel is run by VZDS.
+
+    The Valley Zoo Development Society (VZDS) is a registered charity and non-profit supporting the Edmonton Valley Zoo and its conservation and education programs.
   </div>
 
-  <!-- ANIMAL GRID -->
-  <div class="menu" id="grid">
+  <!-- ANIMALS GRID -->
+  <div class="menu active" id="grid">
 
     <!-- RED PANDAS -->
     <button class="animal-btn" data-type="redpanda" onclick="showAnimal('tango','assets/red pandas/Tango-profile.jpg')">
@@ -267,7 +255,7 @@
     <img id="profileImage" class="profile-img">
 
     <div class="content">
-      <div id="species"></div>
+      <div id="species" class="species"></div>
 
       <div class="label">About</div>
       <div id="about" class="text"></div>
@@ -281,6 +269,7 @@
       <div class="label">Conservation</div>
       <div id="conservation" class="text"></div>
     </div>
+
   </div>
 </div>
 
@@ -291,18 +280,20 @@ function switchTab(tab, btn) {
   document.querySelectorAll('.topbar button').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
 
-  document.getElementById('aboutTab').classList.remove('active');
-  document.getElementById('grid').style.display = 'none';
+  const about = document.getElementById('aboutTab');
+  const grid = document.getElementById('grid');
 
   if (tab === 'about') {
-    document.getElementById('aboutTab').classList.add('active');
+    about.classList.add('active');
+    grid.classList.remove('active');
   } else {
-    document.getElementById('grid').style.display = 'grid';
+    about.classList.remove('active');
+    grid.classList.add('active');
 
     document.querySelectorAll('.animal-btn').forEach(b => {
-      b.style.display = (tab === 'redpanda' || tab === 'seal') && b.dataset.type === tab
-        ? 'block'
-        : (tab === 'about' ? 'block' : 'block');
+      b.style.display = (tab === 'redpanda' || tab === 'seal')
+        ? (b.dataset.type === tab ? 'block' : 'none')
+        : 'block';
     });
   }
 }
@@ -317,13 +308,24 @@ function showAnimal(key, img) {
   document.getElementById("status").innerText = a.status;
   document.getElementById("conservation").innerText = a.conservation;
 
-  document.getElementById("profileImage").src = img;
+  const imgEl = document.getElementById("profileImage");
+  imgEl.src = img;
 
+  imgEl.classList.remove("expanded");
   document.getElementById("lightbox").classList.add("active");
+
+  setTimeout(() => {
+    imgEl.classList.add("expanded");
+  }, 30);
 }
 
 function hideCard() {
-  document.getElementById("lightbox").classList.remove("active");
+  const imgEl = document.getElementById("profileImage");
+  imgEl.classList.remove("expanded");
+
+  setTimeout(() => {
+    document.getElementById("lightbox").classList.remove("active");
+  }, 150);
 }
 </script>
 
