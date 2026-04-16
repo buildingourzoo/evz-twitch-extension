@@ -4,7 +4,8 @@
   <meta charset="UTF-8" />
   <title>EVZ Animals Panel</title>
 
-  <meta http-equiv="Content-Security-Policy" content="frame-ancestors https://*.twitch.tv https://twitch.tv">
+  <meta http-equiv="Content-Security-Policy"
+        content="frame-ancestors https://*.twitch.tv https://twitch.tv">
 
   <style>
     body {
@@ -18,135 +19,97 @@
     }
 
     .wrapper {
-      padding: 6px;
-      box-sizing: border-box;
       height: 100%;
       display: flex;
       flex-direction: column;
+      padding: 6px;
+      box-sizing: border-box;
       gap: 6px;
     }
 
     /* TOP NAV */
-    .tabs {
+    .topbar {
       display: flex;
       gap: 4px;
     }
 
-    .tabs button {
+    .topbar button {
       flex: 1;
       font-size: 10px;
-      padding: 4px;
-      background: #333;
+      padding: 5px;
+      background: #222;
       border: none;
       color: white;
-      border-radius: 4px;
+      border-radius: 5px;
       cursor: pointer;
     }
 
-    .tabs button.active {
-      background: #555;
-    }
-
-    /* FILTERS */
-    .filters {
-      display: none;
-      gap: 4px;
-    }
-
-    .filters.active {
-      display: flex;
-    }
-
-    .filters button {
-      flex: 1;
-      font-size: 10px;
-      padding: 4px;
-      background: #333;
-      border: none;
-      color: white;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    .filters button.active {
-      background: #555;
+    .topbar button.active {
+      background: #444;
     }
 
     /* GRID */
     .menu {
-      display: none;
+      display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 6px;
       overflow-y: auto;
       flex: 1;
     }
 
-    .menu.active {
-      display: grid;
-    }
-
     .animal-btn {
-      padding: 6px;
       background: #222;
-      color: white;
       border: none;
-      cursor: pointer;
+      color: white;
       border-radius: 6px;
+      padding: 6px;
+      cursor: pointer;
       font-size: 11px;
     }
 
     .animal-btn img {
       width: 100%;
-      border-radius: 4px;
+      border-radius: 5px;
       margin-bottom: 4px;
-    }
-
-    .animal-btn:hover {
-      background: #333;
     }
 
     /* ABOUT */
     .about {
       display: none;
-      flex-direction: column;
-      gap: 8px;
       overflow-y: auto;
       flex: 1;
       font-size: 11px;
       line-height: 1.3;
+      padding: 4px;
     }
 
     .about.active {
-      display: flex;
+      display: block;
     }
 
     .logo-row {
       display: flex;
-      gap: 6px;
+      gap: 10px;
       align-items: center;
+      margin-bottom: 8px;
     }
 
     .logo-row img {
-      height: 28px;
+      width: 50%;
       cursor: pointer;
     }
 
     /* LIGHTBOX */
     .lightbox {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 300px;
-      height: 300px;
+      inset: 0;
       background: rgba(0,0,0,0.85);
-
       display: flex;
       justify-content: center;
       align-items: center;
-
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.25s ease;
+      transition: opacity 0.2s ease;
     }
 
     .lightbox.active {
@@ -163,26 +126,24 @@
       position: relative;
     }
 
-    .sticky-header {
+    .sticky {
       position: sticky;
       top: 0;
       background: #000;
-      padding: 6px;
-      border-bottom: 1px solid #222;
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      padding: 6px;
+      border-bottom: 1px solid #222;
       z-index: 2;
     }
 
-    .close-btn {
+    .close {
       cursor: pointer;
-      font-size: 14px;
     }
 
     .profile-img {
       width: 100%;
-      max-height: 160px;
+      max-height: 140px;
       object-fit: contain;
       background: #000;
     }
@@ -194,24 +155,19 @@
     .name {
       font-size: 14px;
       font-weight: bold;
+      margin-bottom: 4px;
     }
 
-    .species {
+    .text {
       font-size: 11px;
-      opacity: 0.8;
-      margin-bottom: 4px;
+      line-height: 1.2;
     }
 
     .label {
       font-size: 10px;
       opacity: 0.6;
-      margin-top: 4px;
+      margin-top: 6px;
     }
-
-    .text {
-      font-size: 11px;
-    }
-
   </style>
 </head>
 
@@ -219,8 +175,8 @@
 
 <div class="wrapper">
 
-  <!-- TABS -->
-  <div class="tabs">
+  <!-- NAV -->
+  <div class="topbar">
     <button class="active" onclick="switchTab('about', this)">About</button>
     <button onclick="switchTab('redpanda', this)">Red Pandas</button>
     <button onclick="switchTab('seal', this)">Seals</button>
@@ -229,67 +185,89 @@
   <!-- ABOUT -->
   <div class="about active" id="aboutTab">
     <div class="logo-row">
-      <a href="https://edmonton.ca/valleyzoo" target="_blank">
-        <img src="assets/logos/EVZ/EVZ_Logo_Owl.jpg" />
+      <a href="https://www.edmonton.ca/valleyzoo" target="_blank">
+        <img src="assets/logos/EVZ/EVZ_Logo_Owl.jpg">
       </a>
 
       <a href="https://buildingourzoo.com" target="_blank">
-        <img src="assets/logos/VZDS/VZDS-Vertical-Logo-White.png" />
+        <img src="assets/logos/VZDS/VZDS-Vertical-Logo-White.png">
       </a>
     </div>
 
-    <div>
-      <b>About the Edmonton Valley Zoo</b><br>
-      The Edmonton Valley Zoo (EVZ) is an accredited facility located in Alberta, Canada. Since its opening on July 1, 1959, the Zoo has become a cornerstone experience connecting visitors with animals in a space dedicated to the care and conservation of our natural world.
-      <br><br>
-      The EVZ is proud to be accredited by Canada’s Accredited Zoos and Aquariums (CAZA), and is also a member of the World Association of Zoos and Aquariums (WAZA)
-    </div>
+    <b>About the Edmonton Valley Zoo</b><br><br>
+    The Edmonton Valley Zoo (EVZ) is an accredited facility located in Alberta, Canada. Since its opening on July 1, 1959, the Zoo has become a cornerstone experience connecting visitors with animals in a space dedicated to conservation and care.<br><br>
 
-    <div>
-      <b>About the Valley Zoo Development Society</b><br>
-      The Valley Zoo Development Society (VZDS) is a registered charity and non-profit that was started in 1988 to ensure the continued development of the beloved Edmonton Valley Zoo.
-      <br><br>
-      The StreamingOurZoo Twitch channel and streams are run by the VZDS, raising funds for the Zoo.
-    </div>
+    EVZ is accredited by CAZA and is a member of WAZA.<br><br>
+
+    <b>About the Valley Zoo Development Society</b><br><br>
+    The VZDS is a registered charity and non-profit supporting the Edmonton Valley Zoo. The Twitch channel is run by VZDS.
   </div>
 
-  <!-- FILTERS -->
-  <div class="filters" id="filters">
-    <button class="active" onclick="filterAnimals('all', this)">All</button>
-    <button onclick="filterAnimals('redpanda', this)">Red Pandas</button>
-    <button onclick="filterAnimals('seal', this)">Seals</button>
+  <!-- ANIMAL GRID -->
+  <div class="menu" id="grid">
+
+    <!-- RED PANDAS -->
+    <button class="animal-btn" data-type="redpanda" onclick="showAnimal('tango','assets/red pandas/Tango-profile.jpg')">
+      <img src="assets/red pandas/Tango-profile.jpg">Tango
+    </button>
+
+    <button class="animal-btn" data-type="redpanda" onclick="showAnimal('kiki','assets/red pandas/Kiki-profile.jpg')">
+      <img src="assets/red pandas/Kiki-profile.jpg">Kiki
+    </button>
+
+    <button class="animal-btn" data-type="redpanda" onclick="showAnimal('fred','assets/red pandas/Fred-profile.jpg')">
+      <img src="assets/red pandas/Fred-profile.jpg">Fred
+    </button>
+
+    <button class="animal-btn" data-type="redpanda" onclick="showAnimal('george','assets/red pandas/George-profile.jpg')">
+      <img src="assets/red pandas/George-profile.jpg">George
+    </button>
+
+    <!-- SEALS -->
+    <button class="animal-btn" data-type="seal" onclick="showAnimal('hula','assets/seals/Hula-profile.jpg')">
+      <img src="assets/seals/Hula-profile.jpg">Hula
+    </button>
+
+    <button class="animal-btn" data-type="seal" onclick="showAnimal('sushi','assets/seals/Sushi-profile.jpg')">
+      <img src="assets/seals/Sushi-profile.jpg">Sushi
+    </button>
+
+    <button class="animal-btn" data-type="seal" onclick="showAnimal('wasabi','assets/seals/Wasabi-profile.jpg')">
+      <img src="assets/seals/Wasabi-profile.jpg">Wasabi
+    </button>
+
+    <button class="animal-btn" data-type="seal" onclick="showAnimal('sophia','assets/seals/Sophia-profile.jpg')">
+      <img src="assets/seals/Sophia-profile.jpg">Sophia
+    </button>
+
+    <button class="animal-btn" data-type="seal" onclick="showAnimal('mischa','assets/seals/Mischa-profile.jpg')">
+      <img src="assets/seals/Mischa-profile.jpg">Mischa
+    </button>
+
+    <button class="animal-btn" data-type="seal" onclick="showAnimal('isadora','assets/seals/Isadora-profile.jpg')">
+      <img src="assets/seals/Isadora-profile.jpg">Isadora
+    </button>
+
+    <button class="animal-btn" data-type="seal" onclick="showAnimal('nika','assets/seals/Nika-profile.jpg')">
+      <img src="assets/seals/Nika-profile.jpg">Nika
+    </button>
+
   </div>
-
-  <!-- GRID -->
-  <div class="menu active" id="menu"></div>
-
 </div>
 
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" onclick="hideCard()">
   <div class="card" onclick="event.stopPropagation()">
 
-    <div class="sticky-header">
+    <div class="sticky">
       <div id="name"></div>
-      <div class="close-btn" onclick="hideCard()">✕</div>
+      <div class="close" onclick="hideCard()">✕</div>
     </div>
 
     <img id="profileImage" class="profile-img">
 
     <div class="content">
-      <div id="species" class="species"></div>
-
-      <div class="label">Sex</div>
-      <div id="sex" class="text"></div>
-
-      <div class="label">Age</div>
-      <div id="age" class="text"></div>
-
-      <div class="label">Birthday</div>
-      <div id="birthday" class="text"></div>
-
-      <div class="label">Arrived</div>
-      <div id="arrived" class="text"></div>
+      <div id="species"></div>
 
       <div class="label">About</div>
       <div id="about" class="text"></div>
@@ -303,63 +281,29 @@
       <div class="label">Conservation</div>
       <div id="conservation" class="text"></div>
     </div>
-
   </div>
 </div>
 
-<script src="https://extension-files.twitch.tv/helper/v1/twitch-ext.min.js"></script>
 <script src="js/panel.js"></script>
 
 <script>
-let currentFilter = "all";
-
 function switchTab(tab, btn) {
-  document.querySelectorAll(".tabs button").forEach(b => b.classList.remove("active"));
-  btn.classList.add("active");
+  document.querySelectorAll('.topbar button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
 
-  document.getElementById("aboutTab").classList.remove("active");
-  document.getElementById("filters").classList.remove("active");
-  document.getElementById("menu").classList.remove("active");
+  document.getElementById('aboutTab').classList.remove('active');
+  document.getElementById('grid').style.display = 'none';
 
-  if (tab === "about") {
-    document.getElementById("aboutTab").classList.add("active");
+  if (tab === 'about') {
+    document.getElementById('aboutTab').classList.add('active');
   } else {
-    document.getElementById("filters").classList.add("active");
-    document.getElementById("menu").classList.add("active");
-    renderAnimals(tab);
-  }
-}
+    document.getElementById('grid').style.display = 'grid';
 
-function filterAnimals(type, btn) {
-  currentFilter = type;
-
-  document.querySelectorAll(".filters button").forEach(b => b.classList.remove("active"));
-  btn.classList.add("active");
-
-  renderAnimals(type);
-}
-
-function renderAnimals(type) {
-  const menu = document.getElementById("menu");
-  menu.innerHTML = "";
-
-  for (const key in animals) {
-    const a = animals[key];
-
-    if (type !== "all" && a.type !== type) continue;
-
-    const btn = document.createElement("button");
-    btn.className = "animal-btn";
-    btn.onclick = () => showAnimal(key, a.image);
-
-    btn.dataset.type = a.type;
-
-    btn.innerHTML = `
-      <img src="${a.image}" />
-      ${a.name}
-    `;
-
-    menu.appendChild(btn);
+    document.querySelectorAll('.animal-btn').forEach(b => {
+      b.style.display = (tab === 'redpanda' || tab === 'seal') && b.dataset.type === tab
+        ? 'block'
+        : (tab === 'about' ? 'block' : 'block');
+    });
   }
 }
 
@@ -368,10 +312,6 @@ function showAnimal(key, img) {
 
   document.getElementById("name").innerText = a.name;
   document.getElementById("species").innerText = a.species;
-  document.getElementById("sex").innerText = a.sex;
-  document.getElementById("age").innerText = a.age;
-  document.getElementById("birthday").innerText = a.birthday;
-  document.getElementById("arrived").innerText = a.arrived;
   document.getElementById("about").innerText = a.about;
   document.getElementById("identifiers").innerText = a.identifiers;
   document.getElementById("status").innerText = a.status;
@@ -385,8 +325,6 @@ function showAnimal(key, img) {
 function hideCard() {
   document.getElementById("lightbox").classList.remove("active");
 }
-
-renderAnimals("all");
 </script>
 
 </body>
