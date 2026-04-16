@@ -26,13 +26,13 @@
       gap: 6px;
     }
 
-    /* FILTERS */
-    .filters {
+    /* TABS */
+    .tabs {
       display: flex;
       gap: 4px;
     }
 
-    .filters button {
+    .tabs button {
       flex: 1;
       font-size: 10px;
       padding: 4px;
@@ -43,8 +43,19 @@
       cursor: pointer;
     }
 
-    .filters button.active {
+    .tabs button.active {
       background: #555;
+    }
+
+    /* PANELS */
+    .panel {
+      display: none;
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    .panel.active {
+      display: block;
     }
 
     /* GRID */
@@ -52,8 +63,6 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 6px;
-      overflow-y: auto;
-      flex: 1;
     }
 
     .animal-btn {
@@ -72,8 +81,17 @@
       margin-bottom: 4px;
     }
 
-    .animal-btn:hover {
-      background: #333;
+    /* ABOUT PAGE */
+    .about {
+      font-size: 11px;
+      line-height: 1.3;
+    }
+
+    .logo {
+      width: 100%;
+      margin-bottom: 8px;
+      cursor: pointer;
+      border-radius: 6px;
     }
 
     /* LIGHTBOX */
@@ -83,7 +101,7 @@
       left: 0;
       width: 300px;
       height: 300px;
-      background: rgba(0,0,0,0.8);
+      background: rgba(0,0,0,0.85);
 
       display: flex;
       justify-content: center;
@@ -94,6 +112,11 @@
       transition: opacity 0.25s ease;
     }
 
+    .lightbox.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
     .card {
       width: 92%;
       height: 92%;
@@ -101,52 +124,43 @@
       border-radius: 10px;
       overflow-y: auto;
       position: relative;
-    }
-
-    /* HEADER */
-    .sticky-header {
-      position: sticky;
-      top: 0;
-      background: #000;
-      padding: 6px;
-      z-index: 2;
-      border-bottom: 1px solid #222;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      padding: 8px;
     }
 
     .close-btn {
+      position: absolute;
+      top: 6px;
+      right: 8px;
       cursor: pointer;
       font-size: 14px;
+    }
+
+    .name {
+      font-size: 14px;
+      font-weight: bold;
+      margin-top: 18px;
     }
 
     .profile-img {
       width: 100%;
       max-height: 140px;
       object-fit: contain;
+      margin-top: 6px;
+      border-radius: 6px;
       background: #000;
     }
 
-    .content {
-      padding: 8px;
-    }
-
-    .species {
+    .text {
       font-size: 11px;
-      opacity: 0.8;
-      margin-bottom: 4px;
+      margin-top: 4px;
     }
 
     .label {
       font-size: 10px;
       opacity: 0.6;
-      margin-top: 4px;
+      margin-top: 6px;
     }
 
-    .text {
-      font-size: 11px;
-    }
   </style>
 </head>
 
@@ -154,76 +168,104 @@
 
 <div class="wrapper">
 
-  <!-- FILTERS -->
-  <div class="filters">
-    <button class="active" onclick="filterAnimals('all', this)">All</button>
-    <button onclick="filterAnimals('redpanda', this)">Red Pandas</button>
-    <button onclick="filterAnimals('seal', this)">Seals</button>
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="active" onclick="switchTab('about', this)">About</button>
+    <button onclick="switchTab('pandas', this)">Red Pandas</button>
+    <button onclick="switchTab('seals', this)">Seals</button>
   </div>
 
-  <!-- GRID -->
-  <div class="menu" id="menu">
+  <!-- ABOUT -->
+  <div id="about" class="panel active">
 
-    <!-- RED PANDAS -->
-    <button class="animal-btn" data-type="redpanda" onclick="showAnimal('tango')"><img src="assets/red pandas/Tango-profile.jpg">Tango</button>
-    <button class="animal-btn" data-type="redpanda" onclick="showAnimal('kiki')"><img src="assets/red pandas/Kiki-profile.jpg">Kiki</button>
-    <button class="animal-btn" data-type="redpanda" onclick="showAnimal('fred')"><img src="assets/red pandas/Fred-profile.jpg">Fred</button>
-    <button class="animal-btn" data-type="redpanda" onclick="showAnimal('george')"><img src="assets/red pandas/George-profile.jpg">George</button>
+    <a href="https://edmonton.ca/valleyzoo" target="_blank">
+      <img class="logo" src="assets/logos/EVZ/EVZ_Logo_Owl.jpg">
+    </a>
 
-    <!-- SEALS -->
-    <button class="animal-btn" data-type="seal" onclick="showAnimal('hula')"><img src="assets/seals/Hula-profile.jpg">Hula</button>
-    <button class="animal-btn" data-type="seal" onclick="showAnimal('sushi')"><img src="assets/seals/Sushi-profile.jpg">Sushi</button>
-    <button class="animal-btn" data-type="seal" onclick="showAnimal('wasabi')"><img src="assets/seals/Wasabi-profile.jpg">Wasabi</button>
-    <button class="animal-btn" data-type="seal" onclick="showAnimal('sophia')"><img src="assets/seals/Sophia-profile.jpg">Sophia</button>
-    <button class="animal-btn" data-type="seal" onclick="showAnimal('mischa')"><img src="assets/seals/Mischa-profile.jpg">Mischa</button>
-    <button class="animal-btn" data-type="seal" onclick="showAnimal('isadora')"><img src="assets/seals/Isadora-profile.jpg">Isadora</button>
-    <button class="animal-btn" data-type="seal" onclick="showAnimal('nika')"><img src="assets/seals/Nika-profile.jpg">Nika</button>
+    <div class="about">
+      <strong>About the Edmonton Valley Zoo</strong><br><br>
+
+      The Edmonton Valley Zoo (EVZ) is an accredited facility located in Alberta, Canada. Since its opening on July 1, 1959, the Zoo has become a cornerstone experience connecting visitors with animals in a space dedicated to the care and conservation of our natural world.<br><br>
+
+      The EVZ is proud to be accredited by Canada’s Accredited Zoos and Aquariums (CAZA), and is also a member of the World Association of Zoos and Aquariums (WAZA).<br><br>
+    </div>
+
+    <a href="https://buildingourzoo.com" target="_blank">
+      <img class="logo" src="assets/logos/VZDS/VZDS-Vertical-Logo-White.png">
+    </a>
+
+    <div class="about">
+      <strong>About the Valley Zoo Development Society</strong><br><br>
+
+      The Valley Zoo Development Society (VZDS) is a registered charity and non-profit that was started in 1988 to ensure the continued development of the beloved Edmonton Valley Zoo. The StreamingOurZoo Twitch channel and streams are run by the VZDS.
+    </div>
+
+  </div>
+
+  <!-- RED PANDAS -->
+  <div id="pandas" class="panel">
+
+    <div class="menu">
+      <button class="animal-btn" onclick="showAnimal('tango')"><img src="assets/red pandas/Tango-profile.jpg">Tango</button>
+      <button class="animal-btn" onclick="showAnimal('kiki')"><img src="assets/red pandas/Kiki-profile.jpg">Kiki</button>
+      <button class="animal-btn" onclick="showAnimal('fred')"><img src="assets/red pandas/Fred-profile.jpg">Fred</button>
+      <button class="animal-btn" onclick="showAnimal('george')"><img src="assets/red pandas/George-profile.jpg">George</button>
+    </div>
+
+  </div>
+
+  <!-- SEALS -->
+  <div id="seals" class="panel">
+
+    <div class="menu">
+      <button class="animal-btn" onclick="showAnimal('hula')"><img src="assets/seals/Hula-profile.jpg">Hula</button>
+      <button class="animal-btn" onclick="showAnimal('sushi')"><img src="assets/seals/Sushi-profile.jpg">Sushi</button>
+      <button class="animal-btn" onclick="showAnimal('wasabi')"><img src="assets/seals/Wasabi-profile.jpg">Wasabi</button>
+      <button class="animal-btn" onclick="showAnimal('sophia')"><img src="assets/seals/Sophia-profile.jpg">Sophia</button>
+      <button class="animal-btn" onclick="showAnimal('mischa')"><img src="assets/seals/Mischa-profile.jpg">Mischa</button>
+      <button class="animal-btn" onclick="showAnimal('isadora')"><img src="assets/seals/Isadora-profile.jpg">Isadora</button>
+      <button class="animal-btn" onclick="showAnimal('nika')"><img src="assets/seals/Nika-profile.jpg">Nika</button>
+    </div>
 
   </div>
 
 </div>
 
-<!-- PROFILE VIEW -->
+<!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" onclick="hideCard()">
-
   <div class="card" onclick="event.stopPropagation()">
+    <div class="close-btn" onclick="hideCard()">✕</div>
 
-    <div class="sticky-header">
-      <div id="name"></div>
-      <div class="close-btn" onclick="hideCard()">✕</div>
-    </div>
+    <div id="name" class="name"></div>
 
     <img id="profileImage" class="profile-img">
 
-    <div class="content">
+    <div class="label">Species</div>
+    <div id="species" class="text"></div>
 
-      <div id="species" class="species"></div>
+    <div class="label">Sex</div>
+    <div id="sex" class="text"></div>
 
-      <div class="label">Sex</div>
-      <div id="sex" class="text"></div>
+    <div class="label">Age</div>
+    <div id="age" class="text"></div>
 
-      <div class="label">Age</div>
-      <div id="age" class="text"></div>
+    <div class="label">Birthday</div>
+    <div id="birthday" class="text"></div>
 
-      <div class="label">Birthday</div>
-      <div id="birthday" class="text"></div>
+    <div class="label">Arrived</div>
+    <div id="arrived" class="text"></div>
 
-      <div class="label">Arrived</div>
-      <div id="arrived" class="text"></div>
+    <div class="label">About</div>
+    <div id="aboutText" class="text"></div>
 
-      <div class="label">About</div>
-      <div id="about" class="text"></div>
+    <div class="label">Identifiers</div>
+    <div id="identifiers" class="text"></div>
 
-      <div class="label">Identifiers</div>
-      <div id="identifiers" class="text"></div>
+    <div class="label">Status</div>
+    <div id="status" class="text"></div>
 
-      <div class="label">IUCN Status</div>
-      <div id="status" class="text"></div>
-
-      <div class="label">Conservation</div>
-      <div id="conservation" class="text"></div>
-
-    </div>
+    <div class="label">Conservation</div>
+    <div id="conservation" class="text"></div>
 
   </div>
 </div>
@@ -232,17 +274,37 @@
 <script src="js/panel.js"></script>
 
 <script>
-function filterAnimals(type, btn) {
-  document.querySelectorAll('.filters button').forEach(b => b.classList.remove('active'));
+function switchTab(tab, btn) {
+  document.querySelectorAll('.tabs button').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
 
-  document.querySelectorAll('.menu button').forEach(item => {
-    if (type === 'all' || item.dataset.type === type) {
-      item.style.display = 'block';
-    } else {
-      item.style.display = 'none';
-    }
-  });
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById(tab).classList.add('active');
+}
+
+function showAnimal(key) {
+  const a = animals[key];
+
+  document.getElementById("name").innerText = a.name;
+  document.getElementById("species").innerText = a.species;
+  document.getElementById("sex").innerText = a.sex;
+  document.getElementById("age").innerText = a.age;
+  document.getElementById("birthday").innerText = a.birthday;
+  document.getElementById("arrived").innerText = a.arrived;
+
+  document.getElementById("aboutText").innerHTML = a.about;
+
+  document.getElementById("identifiers").innerText = a.identifiers;
+  document.getElementById("status").innerText = a.status;
+  document.getElementById("conservation").innerText = a.conservation;
+
+  document.getElementById("profileImage").src = a.image || "";
+
+  document.getElementById("lightbox").classList.add("active");
+}
+
+function hideCard() {
+  document.getElementById("lightbox").classList.remove("active");
 }
 </script>
 
