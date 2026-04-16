@@ -4,8 +4,7 @@
   <meta charset="UTF-8" />
   <title>EVZ Animals Panel</title>
 
-  <meta http-equiv="Content-Security-Policy"
-        content="frame-ancestors https://*.twitch.tv https://twitch.tv">
+  <meta http-equiv="Content-Security-Policy" content="frame-ancestors https://*.twitch.tv https://twitch.tv">
 
   <style>
     body {
@@ -19,89 +18,98 @@
     }
 
     .wrapper {
+      padding: 6px;
+      box-sizing: border-box;
       height: 100%;
       display: flex;
       flex-direction: column;
-      padding: 6px;
-      box-sizing: border-box;
       gap: 6px;
     }
 
-    /* TOP TABS */
-    .topbar {
+    /* TABS */
+    .tabs {
       display: flex;
       gap: 4px;
     }
 
-    .topbar button {
+    .tabs button {
       flex: 1;
       font-size: 10px;
-      padding: 5px;
-      background: #222;
+      padding: 4px;
+      background: #333;
+      border-radius: 4px;
       border: none;
       color: white;
-      border-radius: 5px;
       cursor: pointer;
     }
 
-    .topbar button.active {
-      background: #444;
+    .tabs button.active {
+      background: #555;
     }
 
-    /* ABOUT */
-    .about {
+    /* PANELS */
+    .panel {
       display: none;
       flex: 1;
       overflow-y: auto;
-      font-size: 11px;
-      line-height: 1.3;
-      padding: 4px;
     }
 
-    .about.active {
+    .panel.active {
       display: block;
     }
 
     /* GRID */
     .menu {
-      display: none;
+      display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 6px;
-      overflow-y: auto;
-      flex: 1;
-    }
-
-    .menu.active {
-      display: grid;
     }
 
     .animal-btn {
-      background: #222;
-      border: none;
-      color: white;
-      border-radius: 6px;
       padding: 6px;
+      background: #222;
+      color: white;
+      border: none;
       cursor: pointer;
+      border-radius: 5px;
       font-size: 11px;
     }
 
     .animal-btn img {
       width: 100%;
-      border-radius: 5px;
+      border-radius: 4px;
       margin-bottom: 4px;
+    }
+
+    /* ABOUT PAGE */
+    .about {
+      font-size: 11px;
+      line-height: 1.3;
+    }
+
+    .logo {
+      width: 100%;
+      margin-bottom: 8px;
+      cursor: pointer;
+      border-radius: 6px;
     }
 
     /* LIGHTBOX */
     .lightbox {
       position: absolute;
-      inset: 0;
+      top: 0;
+      left: 0;
+      width: 300px;
+      height: 300px;
       background: rgba(0,0,0,0.85);
+
       display: flex;
       justify-content: center;
       align-items: center;
+
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.2s ease;
+      transition: opacity 0.25s ease;
     }
 
     .lightbox.active {
@@ -115,38 +123,36 @@
       background: #000;
       border-radius: 10px;
       overflow-y: auto;
+      position: relative;
+      padding: 8px;
     }
 
-    .sticky {
-      position: sticky;
-      top: 0;
-      background: #000;
-      display: flex;
-      justify-content: space-between;
-      padding: 6px;
-      border-bottom: 1px solid #222;
-    }
-
-    .close {
+    .close-btn {
+      position: absolute;
+      top: 6px;
+      right: 8px;
       cursor: pointer;
+      font-size: 14px;
     }
 
-    /* IMAGE EXPAND ANIMATION */
+    .name {
+      font-size: 14px;
+      font-weight: bold;
+      margin-top: 18px;
+    }
+
     .profile-img {
       width: 100%;
-      max-height: 90px;
+      max-height: 140px;
       object-fit: contain;
+      margin-top: 6px;
+      border-radius: 6px;
       background: #000;
-      transition: max-height 0.25s ease, transform 0.25s ease;
     }
 
-    .profile-img.expanded {
-      max-height: 160px;
-      transform: scale(1.02);
-    }
-
-    .content {
-      padding: 8px;
+    .text {
+      font-size: 11px;
+      margin-top: 4px;
     }
 
     .label {
@@ -155,15 +161,6 @@
       margin-top: 6px;
     }
 
-    .text {
-      font-size: 11px;
-      line-height: 1.2;
-    }
-
-    .species {
-      font-size: 11px;
-      opacity: 0.8;
-    }
   </style>
 </head>
 
@@ -172,160 +169,142 @@
 <div class="wrapper">
 
   <!-- TABS -->
-  <div class="topbar">
+  <div class="tabs">
     <button class="active" onclick="switchTab('about', this)">About</button>
-    <button onclick="switchTab('redpanda', this)">Red Pandas</button>
-    <button onclick="switchTab('seal', this)">Seals</button>
+    <button onclick="switchTab('pandas', this)">Red Pandas</button>
+    <button onclick="switchTab('seals', this)">Seals</button>
   </div>
 
   <!-- ABOUT -->
-  <div class="about active" id="aboutTab">
-    <b>About the Edmonton Valley Zoo</b><br><br>
+  <div id="about" class="panel active">
 
-    The Edmonton Valley Zoo (EVZ) is an accredited facility located in Alberta, Canada. Since its opening on July 1, 1959, the Zoo has become a cornerstone experience connecting visitors with animals in a space dedicated to the care and conservation of our natural world.<br><br>
+    <a href="https://edmonton.ca/valleyzoo" target="_blank">
+      <img class="logo" src="assets/logos/EVZ/EVZ_Logo_Owl.jpg">
+    </a>
 
-    The EVZ is accredited by CAZA and is a member of WAZA.<br><br>
+    <div class="about">
+      <strong>About the Edmonton Valley Zoo</strong><br><br>
 
-    <b>About the Valley Zoo Development Society</b><br><br>
+      The Edmonton Valley Zoo (EVZ) is an accredited facility located in Alberta, Canada. Since its opening on July 1, 1959, the Zoo has become a cornerstone experience connecting visitors with animals in a space dedicated to the care and conservation of our natural world.<br><br>
 
-    The Valley Zoo Development Society (VZDS) is a registered charity and non-profit supporting the Edmonton Valley Zoo and its conservation and education programs.
-  </div>
+      The EVZ is proud to be accredited by Canada’s Accredited Zoos and Aquariums (CAZA), and is also a member of the World Association of Zoos and Aquariums (WAZA).<br><br>
+    </div>
 
-  <!-- ANIMALS GRID -->
-  <div class="menu active" id="grid">
+    <a href="https://buildingourzoo.com" target="_blank">
+      <img class="logo" src="assets/logos/VZDS/VZDS-Vertical-Logo-White.png">
+    </a>
 
-    <!-- RED PANDAS -->
-    <button class="animal-btn" data-type="redpanda" onclick="showAnimal('tango','assets/red pandas/Tango-profile.jpg')">
-      <img src="assets/red pandas/Tango-profile.jpg">Tango
-    </button>
+    <div class="about">
+      <strong>About the Valley Zoo Development Society</strong><br><br>
 
-    <button class="animal-btn" data-type="redpanda" onclick="showAnimal('kiki','assets/red pandas/Kiki-profile.jpg')">
-      <img src="assets/red pandas/Kiki-profile.jpg">Kiki
-    </button>
-
-    <button class="animal-btn" data-type="redpanda" onclick="showAnimal('fred','assets/red pandas/Fred-profile.jpg')">
-      <img src="assets/red pandas/Fred-profile.jpg">Fred
-    </button>
-
-    <button class="animal-btn" data-type="redpanda" onclick="showAnimal('george','assets/red pandas/George-profile.jpg')">
-      <img src="assets/red pandas/George-profile.jpg">George
-    </button>
-
-    <!-- SEALS -->
-    <button class="animal-btn" data-type="seal" onclick="showAnimal('hula','assets/seals/Hula-profile.jpg')">
-      <img src="assets/seals/Hula-profile.jpg">Hula
-    </button>
-
-    <button class="animal-btn" data-type="seal" onclick="showAnimal('sushi','assets/seals/Sushi-profile.jpg')">
-      <img src="assets/seals/Sushi-profile.jpg">Sushi
-    </button>
-
-    <button class="animal-btn" data-type="seal" onclick="showAnimal('wasabi','assets/seals/Wasabi-profile.jpg')">
-      <img src="assets/seals/Wasabi-profile.jpg">Wasabi
-    </button>
-
-    <button class="animal-btn" data-type="seal" onclick="showAnimal('sophia','assets/seals/Sophia-profile.jpg')">
-      <img src="assets/seals/Sophia-profile.jpg">Sophia
-    </button>
-
-    <button class="animal-btn" data-type="seal" onclick="showAnimal('mischa','assets/seals/Mischa-profile.jpg')">
-      <img src="assets/seals/Mischa-profile.jpg">Mischa
-    </button>
-
-    <button class="animal-btn" data-type="seal" onclick="showAnimal('isadora','assets/seals/Isadora-profile.jpg')">
-      <img src="assets/seals/Isadora-profile.jpg">Isadora
-    </button>
-
-    <button class="animal-btn" data-type="seal" onclick="showAnimal('nika','assets/seals/Nika-profile.jpg')">
-      <img src="assets/seals/Nika-profile.jpg">Nika
-    </button>
+      The Valley Zoo Development Society (VZDS) is a registered charity and non-profit that was started in 1988 to ensure the continued development of the beloved Edmonton Valley Zoo. The StreamingOurZoo Twitch channel and streams are run by the VZDS.
+    </div>
 
   </div>
+
+  <!-- RED PANDAS -->
+  <div id="pandas" class="panel">
+
+    <div class="menu">
+      <button class="animal-btn" onclick="showAnimal('tango')"><img src="assets/red pandas/Tango-profile.jpg">Tango</button>
+      <button class="animal-btn" onclick="showAnimal('kiki')"><img src="assets/red pandas/Kiki-profile.jpg">Kiki</button>
+      <button class="animal-btn" onclick="showAnimal('fred')"><img src="assets/red pandas/Fred-profile.jpg">Fred</button>
+      <button class="animal-btn" onclick="showAnimal('george')"><img src="assets/red pandas/George-profile.jpg">George</button>
+    </div>
+
+  </div>
+
+  <!-- SEALS -->
+  <div id="seals" class="panel">
+
+    <div class="menu">
+      <button class="animal-btn" onclick="showAnimal('hula')"><img src="assets/seals/Hula-profile.jpg">Hula</button>
+      <button class="animal-btn" onclick="showAnimal('sushi')"><img src="assets/seals/Sushi-profile.jpg">Sushi</button>
+      <button class="animal-btn" onclick="showAnimal('wasabi')"><img src="assets/seals/Wasabi-profile.jpg">Wasabi</button>
+      <button class="animal-btn" onclick="showAnimal('sophia')"><img src="assets/seals/Sophia-profile.jpg">Sophia</button>
+      <button class="animal-btn" onclick="showAnimal('mischa')"><img src="assets/seals/Mischa-profile.jpg">Mischa</button>
+      <button class="animal-btn" onclick="showAnimal('isadora')"><img src="assets/seals/Isadora-profile.jpg">Isadora</button>
+      <button class="animal-btn" onclick="showAnimal('nika')"><img src="assets/seals/Nika-profile.jpg">Nika</button>
+    </div>
+
+  </div>
+
 </div>
 
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" onclick="hideCard()">
   <div class="card" onclick="event.stopPropagation()">
+    <div class="close-btn" onclick="hideCard()">✕</div>
 
-    <div class="sticky">
-      <div id="name"></div>
-      <div class="close" onclick="hideCard()">✕</div>
-    </div>
+    <div id="name" class="name"></div>
 
     <img id="profileImage" class="profile-img">
 
-    <div class="content">
-      <div id="species" class="species"></div>
+    <div class="label">Species</div>
+    <div id="species" class="text"></div>
 
-      <div class="label">About</div>
-      <div id="about" class="text"></div>
+    <div class="label">Sex</div>
+    <div id="sex" class="text"></div>
 
-      <div class="label">Identifiers</div>
-      <div id="identifiers" class="text"></div>
+    <div class="label">Age</div>
+    <div id="age" class="text"></div>
 
-      <div class="label">Status</div>
-      <div id="status" class="text"></div>
+    <div class="label">Birthday</div>
+    <div id="birthday" class="text"></div>
 
-      <div class="label">Conservation</div>
-      <div id="conservation" class="text"></div>
-    </div>
+    <div class="label">Arrived</div>
+    <div id="arrived" class="text"></div>
+
+    <div class="label">About</div>
+    <div id="aboutText" class="text"></div>
+
+    <div class="label">Identifiers</div>
+    <div id="identifiers" class="text"></div>
+
+    <div class="label">Status</div>
+    <div id="status" class="text"></div>
+
+    <div class="label">Conservation</div>
+    <div id="conservation" class="text"></div>
 
   </div>
 </div>
 
+<script src="https://extension-files.twitch.tv/helper/v1/twitch-ext.min.js"></script>
 <script src="js/panel.js"></script>
 
 <script>
 function switchTab(tab, btn) {
-  document.querySelectorAll('.topbar button').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tabs button').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
 
-  const about = document.getElementById('aboutTab');
-  const grid = document.getElementById('grid');
-
-  if (tab === 'about') {
-    about.classList.add('active');
-    grid.classList.remove('active');
-  } else {
-    about.classList.remove('active');
-    grid.classList.add('active');
-
-    document.querySelectorAll('.animal-btn').forEach(b => {
-      b.style.display = (tab === 'redpanda' || tab === 'seal')
-        ? (b.dataset.type === tab ? 'block' : 'none')
-        : 'block';
-    });
-  }
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById(tab).classList.add('active');
 }
 
-function showAnimal(key, img) {
+function showAnimal(key) {
   const a = animals[key];
 
   document.getElementById("name").innerText = a.name;
   document.getElementById("species").innerText = a.species;
-  document.getElementById("about").innerText = a.about;
+  document.getElementById("sex").innerText = a.sex;
+  document.getElementById("age").innerText = a.age;
+  document.getElementById("birthday").innerText = a.birthday;
+  document.getElementById("arrived").innerText = a.arrived;
+
+  document.getElementById("aboutText").innerHTML = a.about;
+
   document.getElementById("identifiers").innerText = a.identifiers;
   document.getElementById("status").innerText = a.status;
   document.getElementById("conservation").innerText = a.conservation;
 
-  const imgEl = document.getElementById("profileImage");
-  imgEl.src = img;
+  document.getElementById("profileImage").src = a.image || "";
 
-  imgEl.classList.remove("expanded");
   document.getElementById("lightbox").classList.add("active");
-
-  setTimeout(() => {
-    imgEl.classList.add("expanded");
-  }, 30);
 }
 
 function hideCard() {
-  const imgEl = document.getElementById("profileImage");
-  imgEl.classList.remove("expanded");
-
-  setTimeout(() => {
-    document.getElementById("lightbox").classList.remove("active");
-  }, 150);
+  document.getElementById("lightbox").classList.remove("active");
 }
 </script>
 
