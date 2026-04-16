@@ -26,25 +26,7 @@
       gap: 6px;
     }
 
-    .topbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo {
-      height: 20px;
-    }
-
-    .twitch-btn {
-      font-size: 10px;
-      padding: 3px 6px;
-      background: #6441a5;
-      border-radius: 4px;
-      text-decoration: none;
-      color: white;
-    }
-
+    /* FILTERS */
     .filters {
       display: flex;
       gap: 4px;
@@ -56,12 +38,16 @@
       padding: 4px;
       background: #333;
       border-radius: 4px;
+      border: none;
+      color: white;
+      cursor: pointer;
     }
 
     .filters button.active {
       background: #555;
     }
 
+    /* GRID */
     .menu {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -90,6 +76,7 @@
       background: #333;
     }
 
+    /* LIGHTBOX */
     .lightbox {
       position: absolute;
       top: 0;
@@ -121,6 +108,7 @@
       position: relative;
     }
 
+    /* STICKY HEADER */
     .sticky-header {
       position: sticky;
       top: 0;
@@ -176,30 +164,40 @@
 
 <div class="wrapper">
 
-  <div class="topbar">
-    <img src="assets/logos/VZDS/VZDS-Vertical-Logo-White.png" class="logo">
-    <a href="https://www.twitch.tv/streamingourzoo" target="_blank" class="twitch-btn">Watch</a>
-  </div>
-
+  <!-- FILTERS -->
   <div class="filters">
     <button class="active" onclick="filterAnimals('all', this)">All</button>
     <button onclick="filterAnimals('redpanda', this)">Red Pandas</button>
     <button onclick="filterAnimals('seal', this)">Seals</button>
   </div>
 
+  <!-- GRID -->
   <div class="menu" id="menu">
 
-    <!-- (same buttons as before, unchanged) -->
+    <!-- RED PANDAS -->
+    <button data-type="redpanda" onclick="showAnimal('tango','assets/red pandas/Tango-profile.jpg')"><img src="assets/red pandas/Tango-profile.jpg">Tango</button>
+    <button data-type="redpanda" onclick="showAnimal('kiki','assets/red pandas/Kiki-profile.jpg')"><img src="assets/red pandas/Kiki-profile.jpg">Kiki</button>
+    <button data-type="redpanda" onclick="showAnimal('fred','assets/red pandas/Fred-profile.jpg')"><img src="assets/red pandas/Fred-profile.jpg">Fred</button>
+    <button data-type="redpanda" onclick="showAnimal('george','assets/red pandas/George-profile.jpg')"><img src="assets/red pandas/George-profile.jpg">George</button>
+
+    <!-- SEALS -->
+    <button data-type="seal" onclick="showAnimal('hula','assets/seals/Hula-profile.jpg')"><img src="assets/seals/Hula-profile.jpg">Hula</button>
+    <button data-type="seal" onclick="showAnimal('sushi','assets/seals/Sushi-profile.jpg')"><img src="assets/seals/Sushi-profile.jpg">Sushi</button>
+    <button data-type="seal" onclick="showAnimal('wasabi','assets/seals/Wasabi-profile.jpg')"><img src="assets/seals/Wasabi-profile.jpg">Wasabi</button>
+    <button data-type="seal" onclick="showAnimal('sophia','assets/seals/Sophia-profile.jpg')"><img src="assets/seals/Sophia-profile.jpg">Sophia</button>
+    <button data-type="seal" onclick="showAnimal('mischa','assets/seals/Mischa-profile.jpg')"><img src="assets/seals/Mischa-profile.jpg">Mischa</button>
+    <button data-type="seal" onclick="showAnimal('isadora','assets/seals/Isadora-profile.jpg')"><img src="assets/seals/Isadora-profile.jpg">Isadora</button>
+    <button data-type="seal" onclick="showAnimal('nika','assets/seals/Nika-profile.jpg')"><img src="assets/seals/Nika-profile.jpg">Nika</button>
 
   </div>
 
 </div>
 
+<!-- PROFILE VIEW -->
 <div class="lightbox" id="lightbox" onclick="hideCard()">
 
   <div class="card" onclick="event.stopPropagation()">
 
-    <!-- STICKY HEADER -->
     <div class="sticky-header">
       <div id="name"></div>
       <div class="close-btn" onclick="hideCard()">✕</div>
@@ -223,6 +221,19 @@
 <script>
 let scrollPosition = 0;
 
+function filterAnimals(type, btn) {
+  document.querySelectorAll('.filters button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  document.querySelectorAll('.menu button').forEach(item => {
+    if (type === 'all' || item.dataset.type === type) {
+      item.style.display = 'block';
+    } else {
+      item.style.display = 'none';
+    }
+  });
+}
+
 function showAnimal(key, imgPath) {
   scrollPosition = document.getElementById("menu").scrollTop;
 
@@ -244,22 +255,6 @@ function hideCard() {
   setTimeout(() => {
     document.getElementById("menu").scrollTop = scrollPosition;
   }, 50);
-}
-
-function filterAnimals(type, btn) {
-  const buttons = document.querySelectorAll('.filters button');
-  buttons.forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-
-  const items = document.querySelectorAll('.menu button');
-
-  items.forEach(item => {
-    if (type === 'all') {
-      item.style.display = 'block';
-    } else {
-      item.style.display = item.dataset.type === type ? 'block' : 'none';
-    }
-  });
 }
 </script>
 
