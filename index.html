@@ -94,11 +94,6 @@
       transition: opacity 0.25s ease;
     }
 
-    .lightbox.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
     .card {
       width: 92%;
       height: 92%;
@@ -108,7 +103,7 @@
       position: relative;
     }
 
-    /* STICKY HEADER */
+    /* HEADER */
     .sticky-header {
       position: sticky;
       top: 0;
@@ -170,50 +165,19 @@
   <div class="menu" id="menu">
 
     <!-- RED PANDAS -->
-    <button class="animal-btn" data-type="redpanda" onclick="showAnimal('tango')">
-      <img src="assets/red pandas/Tango-profile.jpg">Tango
-    </button>
-
-    <button class="animal-btn" data-type="redpanda" onclick="showAnimal('kiki')">
-      <img src="assets/red pandas/Kiki-profile.jpg">Kiki
-    </button>
-
-    <button class="animal-btn" data-type="redpanda" onclick="showAnimal('fred')">
-      <img src="assets/red pandas/Fred-profile.jpg">Fred
-    </button>
-
-    <button class="animal-btn" data-type="redpanda" onclick="showAnimal('george')">
-      <img src="assets/red pandas/George-profile.jpg">George
-    </button>
+    <button class="animal-btn" data-type="redpanda" onclick="showAnimal('tango')"><img src="assets/red pandas/Tango-profile.jpg">Tango</button>
+    <button class="animal-btn" data-type="redpanda" onclick="showAnimal('kiki')"><img src="assets/red pandas/Kiki-profile.jpg">Kiki</button>
+    <button class="animal-btn" data-type="redpanda" onclick="showAnimal('fred')"><img src="assets/red pandas/Fred-profile.jpg">Fred</button>
+    <button class="animal-btn" data-type="redpanda" onclick="showAnimal('george')"><img src="assets/red pandas/George-profile.jpg">George</button>
 
     <!-- SEALS -->
-    <button class="animal-btn" data-type="seal" onclick="showAnimal('hula')">
-      <img src="assets/seals/Hula-profile.jpg">Hula
-    </button>
-
-    <button class="animal-btn" data-type="seal" onclick="showAnimal('sushi')">
-      <img src="assets/seals/Sushi-profile.jpg">Sushi
-    </button>
-
-    <button class="animal-btn" data-type="seal" onclick="showAnimal('wasabi')">
-      <img src="assets/seals/Wasabi-profile.jpg">Wasabi
-    </button>
-
-    <button class="animal-btn" data-type="seal" onclick="showAnimal('sophia')">
-      <img src="assets/seals/Sophia-profile.jpg">Sophia
-    </button>
-
-    <button class="animal-btn" data-type="seal" onclick="showAnimal('mischa')">
-      <img src="assets/seals/Mischa-profile.jpg">Mischa
-    </button>
-
-    <button class="animal-btn" data-type="seal" onclick="showAnimal('isadora')">
-      <img src="assets/seals/Isadora-profile.jpg">Isadora
-    </button>
-
-    <button class="animal-btn" data-type="seal" onclick="showAnimal('nika')">
-      <img src="assets/seals/Nika-profile.jpg">Nika
-    </button>
+    <button class="animal-btn" data-type="seal" onclick="showAnimal('hula')"><img src="assets/seals/Hula-profile.jpg">Hula</button>
+    <button class="animal-btn" data-type="seal" onclick="showAnimal('sushi')"><img src="assets/seals/Sushi-profile.jpg">Sushi</button>
+    <button class="animal-btn" data-type="seal" onclick="showAnimal('wasabi')"><img src="assets/seals/Wasabi-profile.jpg">Wasabi</button>
+    <button class="animal-btn" data-type="seal" onclick="showAnimal('sophia')"><img src="assets/seals/Sophia-profile.jpg">Sophia</button>
+    <button class="animal-btn" data-type="seal" onclick="showAnimal('mischa')"><img src="assets/seals/Mischa-profile.jpg">Mischa</button>
+    <button class="animal-btn" data-type="seal" onclick="showAnimal('isadora')"><img src="assets/seals/Isadora-profile.jpg">Isadora</button>
+    <button class="animal-btn" data-type="seal" onclick="showAnimal('nika')"><img src="assets/seals/Nika-profile.jpg">Nika</button>
 
   </div>
 
@@ -232,26 +196,42 @@
     <img id="profileImage" class="profile-img">
 
     <div class="content">
+
       <div id="species" class="species"></div>
+
+      <div class="label">Sex</div>
+      <div id="sex" class="text"></div>
+
+      <div class="label">Age</div>
+      <div id="age" class="text"></div>
+
+      <div class="label">Birthday</div>
+      <div id="birthday" class="text"></div>
+
+      <div class="label">Arrived</div>
+      <div id="arrived" class="text"></div>
 
       <div class="label">About</div>
       <div id="about" class="text"></div>
 
       <div class="label">Identifiers</div>
       <div id="identifiers" class="text"></div>
+
+      <div class="label">IUCN Status</div>
+      <div id="status" class="text"></div>
+
+      <div class="label">Conservation</div>
+      <div id="conservation" class="text"></div>
+
     </div>
 
   </div>
 </div>
 
-<!-- TWITCH LOGIC -->
 <script src="https://extension-files.twitch.tv/helper/v1/twitch-ext.min.js"></script>
 <script src="js/panel.js"></script>
 
-<!-- UI LOGIC -->
 <script>
-let scrollPosition = 0;
-
 function filterAnimals(type, btn) {
   document.querySelectorAll('.filters button').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
@@ -263,24 +243,6 @@ function filterAnimals(type, btn) {
       item.style.display = 'none';
     }
   });
-}
-
-const originalShowAnimal = window.showAnimal;
-
-window.showAnimal = function(key) {
-  scrollPosition = document.getElementById("menu").scrollTop;
-
-  originalShowAnimal(key);
-
-  document.getElementById("lightbox").classList.add("active");
-};
-
-function hideCard() {
-  document.getElementById("lightbox").classList.remove("active");
-
-  setTimeout(() => {
-    document.getElementById("menu").scrollTop = scrollPosition;
-  }, 50);
 }
 </script>
 
