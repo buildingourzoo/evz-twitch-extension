@@ -190,10 +190,19 @@
     <div class="about">
       <strong>About the Edmonton Valley Zoo</strong><br><br>
 
-      The Edmonton Valley Zoo (EVZ) is an accredited facility located in Alberta, Canada. Since its opening on July 1, 1959, the Zoo has become a cornerstone experience connecting visitors with animals in a space dedicated to conservation and care.<br><br>
-
-      EVZ is accredited by CAZA and a member of WAZA.
+      The Edmonton Valley Zoo (EVZ) is an accredited facility located in Alberta, Canada. Since its opening on July 1, 1959, the Zoo has become a cornerstone experience connecting visitors with animals in a space dedicated to the care and conservation of our natural world.
+      <br><br>
+      The EVZ is proud to be accredited by Canada’s Accredited Zoos and Aquariums (CAZA), and is also a member of the World Association of Zoos and Aquariums (WAZA).<br><br>
     </div>
+    
+    <div class="about"> 
+      <strong>About the Valley Zoo Development Society</strong>
+      <br><br> 
+      The Valley Zoo Development Society (VZDS) is a registered charity and non-profit that was started in 1988 to ensure the continued development of the beloved Edmonton Valley Zoo. 
+      <br>
+      The StreamingOurZoo Twitch channel and streams are run by the VZDS. 
+    </div>
+  </div>
   </div>
 
   <!-- RED PANDAS -->
@@ -326,17 +335,27 @@ function showAnimal(key) {
   document.getElementById("conservation").innerText = a.conservation;
 
   const img = document.getElementById("profileImage");
+
+  // RESET FIRST (prevents stuck state)
+  img.classList.remove("expanded");
+  img.src = "";
+
+  // force reflow so animation always triggers
+  void img.offsetWidth;
+
   img.src = a.image || "";
 
-  img.classList.add("expanded");
+  requestAnimationFrame(() => {
+    img.classList.add("expanded");
+  });
 
   document.getElementById("lightbox").classList.add("active");
 }
 
 function hideCard() {
   const img = document.getElementById("profileImage");
-  img.classList.remove("expanded");
 
+  img.classList.remove("expanded");
   document.getElementById("lightbox").classList.remove("active");
 }
 </script>
