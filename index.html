@@ -68,30 +68,17 @@
     .animal-btn {
       padding: 6px;
       background: #222;
-      color: white;
-      border: none;
-      cursor: pointer;
       border-radius: 5px;
       font-size: 11px;
+      border: none;
+      color: white;
+      cursor: pointer;
     }
 
     .animal-btn img {
       width: 100%;
       border-radius: 4px;
       margin-bottom: 4px;
-    }
-
-    /* ABOUT PAGE */
-    .about {
-      font-size: 11px;
-      line-height: 1.3;
-    }
-
-    .logo {
-      width: 100%;
-      margin-bottom: 8px;
-      cursor: pointer;
-      border-radius: 6px;
     }
 
     /* LIGHTBOX */
@@ -143,11 +130,21 @@
 
     .profile-img {
       width: 100%;
-      max-height: 140px;
+      max-height: 0;
+      opacity: 0;
+      transform: scale(0.9);
       object-fit: contain;
-      margin-top: 6px;
       border-radius: 6px;
       background: #000;
+      transition: all 0.3s ease;
+    }
+
+    .profile-img.active {
+      max-height: 140px;
+      opacity: 1;
+      transform: scale(1);
+      margin-top: 6px;
+      margin-bottom: 6px;
     }
 
     .text {
@@ -177,56 +174,38 @@
 
   <!-- ABOUT -->
   <div id="about" class="panel active">
-
-    <a href="https://edmonton.ca/valleyzoo" target="_blank">
-      <img class="logo" src="assets/logos/EVZ/EVZ_Logo_Owl.jpg">
-    </a>
-
-    <div class="about">
+    <div class="text">
       <strong>About the Edmonton Valley Zoo</strong><br><br>
-
       The Edmonton Valley Zoo (EVZ) is an accredited facility located in Alberta, Canada. Since its opening on July 1, 1959, the Zoo has become a cornerstone experience connecting visitors with animals in a space dedicated to the care and conservation of our natural world.<br><br>
-
       The EVZ is proud to be accredited by Canada’s Accredited Zoos and Aquariums (CAZA), and is also a member of the World Association of Zoos and Aquariums (WAZA).<br><br>
-    </div>
-
-    <a href="https://buildingourzoo.com" target="_blank">
-      <img class="logo" src="assets/logos/VZDS/VZDS-Vertical-Logo-White.png">
-    </a>
-
-    <div class="about">
       <strong>About the Valley Zoo Development Society</strong><br><br>
-
-      The Valley Zoo Development Society (VZDS) is a registered charity and non-profit that was started in 1988 to ensure the continued development of the beloved Edmonton Valley Zoo. The StreamingOurZoo Twitch channel and streams are run by the VZDS.
+      The Valley Zoo Development Society (VZDS) is a registered charity and non-profit that was started in 1988 to ensure the continued development of the beloved Edmonton Valley Zoo.
+      <br><br>
+      The StreamingOurZoo Twitch channel and streams are run by the VZDS.
     </div>
-
   </div>
 
   <!-- RED PANDAS -->
   <div id="pandas" class="panel">
-
     <div class="menu">
-      <button class="animal-btn" onclick="showAnimal('tango')"><img src="assets/red pandas/Tango-profile.jpg">Tango</button>
-      <button class="animal-btn" onclick="showAnimal('kiki')"><img src="assets/red pandas/Kiki-profile.jpg">Kiki</button>
-      <button class="animal-btn" onclick="showAnimal('fred')"><img src="assets/red pandas/Fred-profile.jpg">Fred</button>
-      <button class="animal-btn" onclick="showAnimal('george')"><img src="assets/red pandas/George-profile.jpg">George</button>
+      <button class="animal-btn" onclick="showAnimal('tango','assets/red pandas/Tango-profile.jpg')"><img src="assets/red pandas/Tango-profile.jpg">Tango</button>
+      <button class="animal-btn" onclick="showAnimal('kiki','assets/red pandas/Kiki-profile.jpg')"><img src="assets/red pandas/Kiki-profile.jpg">Kiki</button>
+      <button class="animal-btn" onclick="showAnimal('fred','assets/red pandas/Fred-profile.jpg')"><img src="assets/red pandas/Fred-profile.jpg">Fred</button>
+      <button class="animal-btn" onclick="showAnimal('george','assets/red pandas/George-profile.jpg')"><img src="assets/red pandas/George-profile.jpg">George</button>
     </div>
-
   </div>
 
   <!-- SEALS -->
   <div id="seals" class="panel">
-
     <div class="menu">
-      <button class="animal-btn" onclick="showAnimal('hula')"><img src="assets/seals/Hula-profile.jpg">Hula</button>
-      <button class="animal-btn" onclick="showAnimal('sushi')"><img src="assets/seals/Sushi-profile.jpg">Sushi</button>
-      <button class="animal-btn" onclick="showAnimal('wasabi')"><img src="assets/seals/Wasabi-profile.jpg">Wasabi</button>
-      <button class="animal-btn" onclick="showAnimal('sophia')"><img src="assets/seals/Sophia-profile.jpg">Sophia</button>
-      <button class="animal-btn" onclick="showAnimal('mischa')"><img src="assets/seals/Mischa-profile.jpg">Mischa</button>
-      <button class="animal-btn" onclick="showAnimal('isadora')"><img src="assets/seals/Isadora-profile.jpg">Isadora</button>
-      <button class="animal-btn" onclick="showAnimal('nika')"><img src="assets/seals/Nika-profile.jpg">Nika</button>
+      <button class="animal-btn" onclick="showAnimal('hula','assets/seals/Hula-profile.jpg')"><img src="assets/seals/Hula-profile.jpg">Hula</button>
+      <button class="animal-btn" onclick="showAnimal('sushi','assets/seals/Sushi-profile.jpg')"><img src="assets/seals/Sushi-profile.jpg">Sushi</button>
+      <button class="animal-btn" onclick="showAnimal('wasabi','assets/seals/Wasabi-profile.jpg')"><img src="assets/seals/Wasabi-profile.jpg">Wasabi</button>
+      <button class="animal-btn" onclick="showAnimal('sophia','assets/seals/Sophia-profile.jpg')"><img src="assets/seals/Sophia-profile.jpg">Sophia</button>
+      <button class="animal-btn" onclick="showAnimal('mischa','assets/seals/Mischa-profile.jpg')"><img src="assets/seals/Mischa-profile.jpg">Mischa</button>
+      <button class="animal-btn" onclick="showAnimal('isadora','assets/seals/Isadora-profile.jpg')"><img src="assets/seals/Isadora-profile.jpg">Isadora</button>
+      <button class="animal-btn" onclick="showAnimal('nika','assets/seals/Nika-profile.jpg')"><img src="assets/seals/Nika-profile.jpg">Nika</button>
     </div>
-
   </div>
 
 </div>
@@ -234,6 +213,7 @@
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" onclick="hideCard()">
   <div class="card" onclick="event.stopPropagation()">
+
     <div class="close-btn" onclick="hideCard()">✕</div>
 
     <div id="name" class="name"></div>
@@ -243,29 +223,11 @@
     <div class="label">Species</div>
     <div id="species" class="text"></div>
 
-    <div class="label">Sex</div>
-    <div id="sex" class="text"></div>
-
-    <div class="label">Age</div>
-    <div id="age" class="text"></div>
-
-    <div class="label">Birthday</div>
-    <div id="birthday" class="text"></div>
-
-    <div class="label">Arrived</div>
-    <div id="arrived" class="text"></div>
-
     <div class="label">About</div>
     <div id="aboutText" class="text"></div>
 
     <div class="label">Identifiers</div>
     <div id="identifiers" class="text"></div>
-
-    <div class="label">Status</div>
-    <div id="status" class="text"></div>
-
-    <div class="label">Conservation</div>
-    <div id="conservation" class="text"></div>
 
   </div>
 </div>
@@ -282,29 +244,33 @@ function switchTab(tab, btn) {
   document.getElementById(tab).classList.add('active');
 }
 
-function showAnimal(key) {
+function showAnimal(key, imgPath) {
   const a = animals[key];
 
   document.getElementById("name").innerText = a.name;
   document.getElementById("species").innerText = a.species;
-  document.getElementById("sex").innerText = a.sex;
-  document.getElementById("age").innerText = a.age;
-  document.getElementById("birthday").innerText = a.birthday;
-  document.getElementById("arrived").innerText = a.arrived;
-
   document.getElementById("aboutText").innerHTML = a.about;
-
   document.getElementById("identifiers").innerText = a.identifiers;
-  document.getElementById("status").innerText = a.status;
-  document.getElementById("conservation").innerText = a.conservation;
 
-  document.getElementById("profileImage").src = a.image || "";
+  const img = document.getElementById("profileImage");
+  img.src = imgPath;
+  img.classList.remove("active");
+
+  // trigger animation
+  setTimeout(() => {
+    img.classList.add("active");
+  }, 10);
 
   document.getElementById("lightbox").classList.add("active");
 }
 
 function hideCard() {
-  document.getElementById("lightbox").classList.remove("active");
+  const img = document.getElementById("profileImage");
+  img.classList.remove("active");
+
+  setTimeout(() => {
+    document.getElementById("lightbox").classList.remove("active");
+  }, 200);
 }
 </script>
 
