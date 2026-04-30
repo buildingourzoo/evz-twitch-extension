@@ -146,6 +146,48 @@ const animals = {
     status: "Vulnerable",
     conservation: "Conservation info"
   },
+
+  // ARCTIC WOLVES //
+  
+  tundra: {
+    name: "Tundra",
+    species: "Arctic wolf (Canis lupus arctos)",
+    sex: "Male",
+    age: "14",
+    birthday: "April 30, 2012",
+    arrived: "2014",
+    about: "Tundra is goofy, gentle and sweet. As the most experienced member of the pack, he moves at his own pace and often spends time on elevated areas of the habitat where he can observe everything around him.",
+    identifiers: "Tundra is the largest of the three wolves and has a thick, majestic coat.",
+    status: "Least Concern",
+    conservation: "Extreme weather variations in recent years have made it more difficult for populations of musk ox and Arctic hares to find food which has caused a significant decline in their numbers. As a result, this has reduced the traditional food supply of the Arctic wolf."
+  },
+
+  aspen: {
+    name: "Aspen",
+    species: "Arctic wolf (Canis lupus arctos)",
+    sex: "Female",
+    age: "5",
+    birthday: "April 16, 2021",
+    arrived: "2024",
+    about: "Aspen is the more dominant of the girls, and is a little more cautious around people. She enjoys chasing Anuri around the yard when she thinks that no one is watching, and has quickly settled into her role in the pack.
+ ",
+    identifiers: "Narrow face and body, distinct black spot on tail"
+    status: "Extreme weather variations in recent years have made it more difficult for populations of musk ox and Arctic hares to find food which has caused a significant decline in their numbers. As a result, this has reduced the traditional food supply of the Arctic wolf.",
+    conservation: "Text"
+  },
+
+  anuri: {
+    name: "Anuri",
+    species: "Arctic wolf (Canis lupus arctos)",
+    sex: "Female",
+    age: "4",
+    birthday: "April 05, 2022",
+    arrived: "2024",
+    about: "Anuri is known for her bold and outgoing personality. While she ranks lower than Aspen in the pack hierarchy, she is calm, brave, and often initiates play and likes to engage with enrichment activities throughout the day.",
+    identifiers: "Stocky build and small, more faded black spot on tail",
+    status: "Least Concern",
+    conservation: "Extreme weather variations in recent years have made it more difficult for populations of musk ox and Arctic hares to find food which has caused a significant decline in their numbers. As a result, this has reduced the traditional food supply of the Arctic wolf."
+  },
   
 };
 
